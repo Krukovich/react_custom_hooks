@@ -13,6 +13,6 @@ const useDebounce = (callback, delay) => {
   }, [callback, delay]);
 
   return debouncedCallback;
-}
+};
 
 export default useDebounce;

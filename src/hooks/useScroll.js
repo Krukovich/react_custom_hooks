@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function useScroll(parentRef, childRef, callback) {
+export const useScroll = (parentRef, childRef, callback) => {
   const observer = useRef();
 
   useEffect(() => {
@@ -9,9 +9,9 @@ export default function useScroll(parentRef, childRef, callback) {
       rootMargin: '0px',
       threshold: 0,
     };
+
     observer.current = new IntersectionObserver(([target]) => {
       if (target.isIntersecting) {
-        console.log('intersected');
         callback();
       }
     }, options);
@@ -22,4 +22,6 @@ export default function useScroll(parentRef, childRef, callback) {
       observer.current.unobserve(childRef.current);
     };
   }, [callback]);
-}
+};
+
+export default useScroll;
