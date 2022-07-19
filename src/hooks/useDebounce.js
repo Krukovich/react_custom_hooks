@@ -1,14 +1,14 @@
 import { useCallback, useRef } from 'react';
 
-const useDebounce = (callback, delay) => {
+const useDebounce = (callback, delay, setResponse) => {
   const timer = useRef();
 
-  const debouncedCallback = useCallback(() => {
+  const debouncedCallback = useCallback((limit) => {
     if (timer.current) {
       clearTimeout(timer.current);
     }
-    timer.current = setTimeout(() => {
-      callback();
+    timer.current = setTimeout(async () => {
+      setResponse(await callback(limit));
     }, delay);
   }, [callback, delay]);
 
